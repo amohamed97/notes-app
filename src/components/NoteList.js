@@ -25,12 +25,15 @@ export class NodeList extends React.Component{
         return (
                 <div className="row">
                     <div className="col-6 offset-3">
-                        <div className="note-list p-3 rounded shadow">
+                        <div className="card shadow">
+                            <div className="card-header text-center"><h3>My Notes</h3></div>
+                            <div className="card-body">
                             {
                                 this.state.notes.map((note) =>(
                                     <Note key={note.id} content={note} deleteNote={this.deleteNote}/>
                                 ))
                             }
+                            </div>
                         </div>
                     </div>
                 </div>
