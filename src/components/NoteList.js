@@ -7,8 +7,16 @@ export class NodeList extends React.Component{
         notes: []
     }
 
+    deleteNote = id =>{
+        Axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
+            this.setState({
+                notes: this.state.notes.filter(note => note.id !== id)
+            })
+        );
+    }
+
     componentDidMount(){
-        Axios.get('https://jsonplaceholder.typicode.com/todos')
+        Axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
         .then(res => this.setState({notes: res.data}))
     }
 
@@ -20,7 +28,7 @@ export class NodeList extends React.Component{
                         <div className="note-list p-3 rounded shadow">
                             {
                                 this.state.notes.map((note) =>(
-                                    <Note key={note.id} content={note}/>
+                                    <Note key={note.id} content={note} deleteNote={this.deleteNote}/>
                                 ))
                             }
                         </div>
