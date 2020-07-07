@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 export class Header extends Component {
     render() {
@@ -6,7 +7,7 @@ export class Header extends Component {
             <div className="mb-4">
                 <nav className="navbar navbar-dark bg-dark">
                     <div className="container">
-                        <a className="navbar-brand" href="#">Note.js</a>
+                        <span className="navbar-brand" href="#">Note.js</span>
                     </div>
                 </nav>
             </div>
