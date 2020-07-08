@@ -71,7 +71,7 @@ export class SignupForm extends Component {
                                 </div>
                                 <div className="text-center">
                                     {/* <Link to="/notes"> */}
-                                        <button className="btn btn-primary" onClick={this.validateSignup}>Sign Up</button>
+                                        <button id="signupBtn" className="btn btn-primary" onClick={this.validateSignup}>Sign Up</button>
                                     {/* </Link> */}
                                 </div>     
                             </form>    

@@ -57,7 +57,7 @@ export class LoginForm extends Component {
                                 </div>
                                 <div className="text-center">
                                     {/* <Link to={() => this.validateLogin()}> */}
-                                        <button type="submit" onClick={this.validateLogin} className="btn btn-success mb-3" >Login</button>
+                                        <button id="loginBtn" type="submit" onClick={this.validateLogin} className="btn btn-success mb-3" >Login</button>
                                     {/* </Link> */}
                                 </div>     
                             </form>
