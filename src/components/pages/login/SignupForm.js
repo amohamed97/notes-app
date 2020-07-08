@@ -20,6 +20,25 @@ export class SignupForm extends Component {
         this.setState({passwordConfirm: e.target.value})
     }
 
+    validateSignup = (e) => {
+        e.preventDefault();
+        const emailIsValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailInput);
+        const passIsValid = this.state.password.length >= 6;
+        const passMatch = (this.state.password === this.state.passwordConfirm);
+        if(emailIsValid && passIsValid && passMatch){
+            this.props.history.push("/notes");
+        }else{
+            alert(
+                (emailIsValid ? "":"Invalid Email\n")
+                + (passIsValid ? "":"Password must have at least 6 characters\n")
+                + (passMatch ? "": "Password don't match")
+
+            )
+        }
+        
+        
+    }
+
 
     render() {
         return (
@@ -30,30 +49,30 @@ export class SignupForm extends Component {
                         <div className="card-body">
                             <form>
                                 <div className="form-group">
-                                    <label for="emailInput">Email address</label>
+                                    <label htmlFor="emailInput">Email address</label>
                                     <input type="email" 
                                     value={this.state.emailInput}
                                     onChange={this.changeEmail} 
                                     className="form-control" id="emailInput"/>
                                 </div>
                                 <div className="form-group">
-                                    <label for="passwordInput">Password</label>
+                                    <label htmlFor="passwordInput">Password</label>
                                     <input type="password" 
                                     value={this.state.password}
                                     onChange={this.changePassword} 
                                     className="form-control" id="passwordInput"/>
                                 </div>
                                 <div className="form-group">
-                                    <label for="passwordConfirmInput">Confirm Password</label>
+                                    <label htmlFor="passwordConfirmInput">Confirm Password</label>
                                     <input type="password"
                                     value={this.state.passwordConfirm}
                                     onChange={this.changeConfirmPassword} 
                                     className="form-control" id="passwordConfirmInput"/>
                                 </div>
                                 <div className="text-center">
-                                    <Link to="/notes">
-                                        <button className="btn btn-primary">Sign Up</button>
-                                    </Link>
+                                    {/* <Link to="/notes"> */}
+                                        <button className="btn btn-primary" onClick={this.validateSignup}>Sign Up</button>
+                                    {/* </Link> */}
                                 </div>     
                             </form>    
                         </div>

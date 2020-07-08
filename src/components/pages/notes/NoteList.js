@@ -15,6 +15,16 @@ export class NodeList extends React.Component{
         );
     }
 
+    editNote = (id, newTitle) => {
+        let newNotes = this.state.notes.slice();
+        newNotes.forEach((note) =>{
+            if(note.id === id){
+                note.title = newTitle
+            }
+        })
+        this.setState({notes: newNotes})
+    }
+
     componentDidMount(){
         Axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
         .then(res => this.setState({notes: res.data}))
@@ -30,7 +40,7 @@ export class NodeList extends React.Component{
                             <div className="card-body">
                             {
                                 this.state.notes.map((note) =>(
-                                    <Note key={note.id} content={note} deleteNote={this.deleteNote}/>
+                                    <Note key={note.id} content={note} deleteNote={this.deleteNote} editNote={this.editNote}/>
                                 ))
                             }
                             </div>

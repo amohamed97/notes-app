@@ -15,6 +15,23 @@ export class LoginForm extends Component {
         this.setState({password: e.target.value})
     }
 
+    validateLogin = (e) => {
+        e.preventDefault();
+        const emailIsValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailInput);
+        const passIsValid = this.state.password.length >= 6;
+        if(emailIsValid && passIsValid){
+            this.props.history.push("/notes");
+        }else{
+            alert(
+                (emailIsValid ? "":"Invalid Email\n")
+                + 
+                (passIsValid ? "":"Password must have at least 6 characters")
+            )
+        }
+        
+        
+    }
+
 
     render() {
         return (
@@ -25,23 +42,23 @@ export class LoginForm extends Component {
                         <div className="card-body">
                             <form>
                                 <div className="form-group">
-                                    <label for="emailInput">Email address</label>
+                                    <label htmlFor="emailInput">Email address</label>
                                     <input type="email" 
                                     value={this.state.emailInput}
                                     onChange={this.changeEmail} 
                                     className="form-control" id="emailInput"/>
                                 </div>
                                 <div className="form-group">
-                                    <label for="passwordInput">Password</label>
+                                    <label htmlFor="passwordInput">Password</label>
                                     <input type="password" 
                                     value={this.state.password}
                                     onChange={this.changePassword} 
                                     className="form-control" id="passwordInput"/>
                                 </div>
                                 <div className="text-center">
-                                    <Link to="/notes">
-                                        <button type="submit" class="btn btn-success mb-3" >Login</button>
-                                    </Link>
+                                    {/* <Link to={() => this.validateLogin()}> */}
+                                        <button type="submit" onClick={this.validateLogin} className="btn btn-success mb-3" >Login</button>
+                                    {/* </Link> */}
                                 </div>     
                             </form>
                             <div className="text-center">
