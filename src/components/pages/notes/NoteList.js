@@ -30,7 +30,7 @@ export class NodeList extends React.Component{
     }
 
     componentDidMount(){
-        Axios.get('http://127.0.0.1:5000/notes')
+        Axios.get(`http://127.0.0.1:5000/${this.props.loggedUser}/notes`)
         .then(res => {
             this.setState({notes: res.data})
         }).catch(err => {

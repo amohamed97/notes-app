@@ -32,6 +32,7 @@ export class LoginForm extends Component {
         if(emailIsValid && passIsValid){
             this.checkAccount(this.state.emailInput, this.state.password).then((res) =>{
                 if(res.status == 200){
+                    this.props.login(this.state.emailInput)
                     this.props.history.push("/notes");
                 }
             }).catch((err) =>{
