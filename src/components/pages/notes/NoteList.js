@@ -13,21 +13,29 @@ export class NodeList extends React.Component{
     }
 
     deleteNote = id =>{
-        Axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
+        Axios.delete(`http://127.0.0.1:5000/${this.props.loggedUser}/notes/${id}`).then(res =>
             this.setState({
                 notes: this.state.notes.filter(note => note.id !== id)
             })
-        );
+        ).catch((err) =>{
+            console.log(err.response)
+        })
     }
 
     editNote = (id, newTitle) => {
-        let newNotes = this.state.notes.slice();
-        newNotes.forEach((note) =>{
-            if(note.id === id){
-                note.title = newTitle;
+        Axios.put(`http://127.0.0.1:5000/${this.props.loggedUser}/notes/${id}`, {
+            editedNote: newTitle
+        }).then(res =>{
+            let newNotes = this.state.notes.slice();
+            newNotes.forEach((note) =>{
+                if(note.id === id){
+                    note.title = newTitle;
+                }
+            })
+            this.setState({notes: newNotes});
             }
-        })
-        this.setState({notes: newNotes});
+        );
+        
     }
 
     addNote = (newNote) =>{

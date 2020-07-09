@@ -83,7 +83,7 @@ export class LoginForm extends Component {
                             </form>
                             <div className="text-center">
                                 <Link to="/signup">
-                                    <button className="btn btn-primary">Sign Up</button>
+                                    <button className="btn btn-link">Create a new account</button>
                                 </Link>
                             </div>     
                             
