@@ -2,6 +2,7 @@
 import React from 'react';
 import Note from './Note';
 import Axios from 'axios';
+import AddNote from './AddNote'
 
 export class NodeList extends React.Component{
     constructor(props){
@@ -29,6 +30,15 @@ export class NodeList extends React.Component{
         this.setState({notes: newNotes});
     }
 
+    addNote = (newNote) =>{
+        Axios.post(`http://127.0.0.1:5000/${this.props.loggedUser}/notes`, {
+            newNote
+        }).then(res =>
+            this.setState({notes: this.state.notes.concat({id: res.data.id, title: newNote})})
+        );
+        
+    }
+
     componentDidMount(){
         Axios.get(`http://127.0.0.1:5000/${this.props.loggedUser}/notes`)
         .then(res => {
@@ -46,6 +56,7 @@ export class NodeList extends React.Component{
                         <div className="card shadow">
                             <div className="card-header text-center"><h3>My Notes</h3></div>
                             <div className="card-body">
+                            <AddNote addNote={this.addNote}/>
                             {
                                 this.state.notes.map((note) =>(
                                     <Note key={note.id} content={note} deleteNote={this.deleteNote} editNote={this.editNote}/>
