@@ -45,7 +45,7 @@ function AddNote(props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="danger" onClick={handleDiscard}>
+                <Button variant="outline-danger" onClick={handleDiscard}>
                     Discard
                 </Button>
                 <Button variant="success" onClick={handleAdd}>

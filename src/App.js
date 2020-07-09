@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/layout/Header'
 import NoteList from './components/pages/notes/NoteList'
 import LoginForm from './components/pages/login/LoginForm';
-import {Route, Switch, RouteProps} from 'react-router-dom'
+import {Route, Switch, RouteProps, Redirect} from 'react-router-dom'
 import SignupForm from './components/pages/login/SignupForm';
 
 
@@ -14,6 +14,7 @@ function App() {
   function login(email){
     setLoggedIn(true)
     setLoggedUser(email)
+    localStorage.setItem('loggedEmail', email);
   }
 
   return (
@@ -21,9 +22,12 @@ function App() {
         <Header/>
         <div className="container">
           <Switch>
-            <Route exact path="/login" render={(props) => <LoginForm {...props} login={login} />}></Route>
+            <Route exact path="/">
+              <Redirect to='/login'/> 
+            </Route>
+            <Route path="/login" render={(props) => <LoginForm {...props} login={login} />}></Route>
             <Route component={SignupForm} exact path="/signup"></Route>
-            <Route  exact path="/notes" render={(props) => <NoteList {...props} loggedUser={loggedUser} />}></Route>
+            <Route path="/notes" render={(props) => <NoteList {...props} loggedUser={loggedUser} />}></Route>
           </Switch>
         </div>
     </div>
