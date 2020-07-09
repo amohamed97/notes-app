@@ -28,8 +28,8 @@ describe("Testing Login Validation", () =>{
 
     it("Test if login redirects if email and password valid", () => {
         wrapper.setState({
-            emailInput: "adsadad@gmail.com",
-            password: "helloworld"
+            emailInput: "user@user.com",
+            password: "123456"
         })
         simulateClick();
         expect(spyArray).toEqual(["/notes"])

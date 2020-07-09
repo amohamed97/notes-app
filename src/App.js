@@ -8,12 +8,13 @@ import SignupForm from './components/pages/login/SignupForm';
 
 
 function App() {
+
   return (
     <div className="App">
         <Header/>
         <div className="container">
           <Switch>
-            <Route component={LoginForm} exact path="/"></Route>
+            <Route component={LoginForm} exact path="/login"></Route>
             <Route component={SignupForm} exact path="/signup"></Route>
             <Route component={NoteList} exact path="/notes"></Route>
           </Switch>

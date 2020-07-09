@@ -1,10 +1,14 @@
-import React from 'react'
-import Note from './Note'
-import Axios from 'axios'
+//jshint esversion:6
+import React from 'react';
+import Note from './Note';
+import Axios from 'axios';
 
 export class NodeList extends React.Component{
-    state = {
-        notes: []
+    constructor(props){
+        super(props);
+        this.state = {
+            notes: []
+        }
     }
 
     deleteNote = id =>{
@@ -19,15 +23,19 @@ export class NodeList extends React.Component{
         let newNotes = this.state.notes.slice();
         newNotes.forEach((note) =>{
             if(note.id === id){
-                note.title = newTitle
+                note.title = newTitle;
             }
         })
-        this.setState({notes: newNotes})
+        this.setState({notes: newNotes});
     }
 
     componentDidMount(){
-        Axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-        .then(res => this.setState({notes: res.data}))
+        Axios.get('http://127.0.0.1:5000/notes')
+        .then(res => {
+            this.setState({notes: res.data})
+        }).catch(err => {
+            console.log(err)
+        });
     }
 
 

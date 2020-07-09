@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Switch, Router, Link} from 'react-router-dom'
+import axios from 'axios'
 
 export class LoginForm extends Component {
     state = {
@@ -15,12 +16,30 @@ export class LoginForm extends Component {
         this.setState({password: e.target.value})
     }
 
+    checkAccount = (email, password) =>{
+        return axios.post('http://127.0.0.1:5000/login', {
+            email,
+            password
+        }).then((res) =>{
+            return res
+        })
+    }
+
     validateLogin = (e) => {
         e.preventDefault();
         const emailIsValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.emailInput);
         const passIsValid = this.state.password.length >= 6;
         if(emailIsValid && passIsValid){
-            this.props.history.push("/notes");
+            this.checkAccount(this.state.emailInput, this.state.password).then((res) =>{
+                if(res.status == 200){
+                    this.props.history.push("/notes");
+                }
+            }).catch((err) =>{
+                if(err.response.status == 403){
+                    alert(err.response.data.msg)
+                }
+            })
+            
         }else{
             alert(
                 (emailIsValid ? "":"Invalid Email\n")
